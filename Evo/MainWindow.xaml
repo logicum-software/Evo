@@ -8,31 +8,33 @@
         Title="Evo Rev. 0.0.1" Height="600" Width="945" WindowStartupLocation="CenterScreen">
     <Grid Width="945" Height="600">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="562*"/>
-            <ColumnDefinition Width="229*"/>
-            <ColumnDefinition Width="175*"/>
+            <ColumnDefinition Width="176*"/>
+            <ColumnDefinition Width="374*"/>
+            <ColumnDefinition Width="224*"/>
+            <ColumnDefinition Width="171*"/>
         </Grid.ColumnDefinitions>
-        <GridSplitter x:Name="gridSplitter" HorizontalAlignment="Left" Height="543" Margin="465,10,0,0" VerticalAlignment="Top" Width="5"/>
+        <GridSplitter x:Name="gridSplitter" HorizontalAlignment="Left" Height="543" Margin="289,10,0,0" VerticalAlignment="Top" Width="5" Grid.Column="1"/>
         <Label x:Name="label" Content="Your text:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Margin="10,151,0,47" Width="450">
+        <ListView x:Name="listViewUser" HorizontalAlignment="Left" Margin="10,151,0,47" Width="450" Grid.ColumnSpan="2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="450"/>
+        <TextBox x:Name="textBoxUser" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="450" Grid.ColumnSpan="2"/>
         <Label x:Name="label1" Content="History:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label2" Content="Evo:" HorizontalAlignment="Left" Margin="475,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox1" Height="23" Margin="475,41,41,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
-        <Label x:Name="label1_Copy" Content="History:" HorizontalAlignment="Left" Margin="514,120,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <ListView x:Name="listView_Copy" Height="402" Margin="475,151,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" HorizontalAlignment="Left" Width="450">
+        <Label x:Name="label2" Content="AI" HorizontalAlignment="Left" Margin="299,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="label1_Copy" Content="History:" HorizontalAlignment="Left" Margin="299,41,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <ListView x:Name="listViewEvo" Height="484" Margin="299,69,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" HorizontalAlignment="Left" Width="450" Grid.Column="1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button x:Name="buttonSubmit" Content="Submit" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top" Width="75" Click="buttonSubmit_Click"/>
+        <Button x:Name="buttonStatus" Content="Status" Grid.Column="3" HorizontalAlignment="Left" Margin="76,44,0,0" VerticalAlignment="Top" Width="75" Click="buttonStatus_Click"/>
 
     </Grid>
 </Window>
