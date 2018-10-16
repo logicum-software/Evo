@@ -15,8 +15,8 @@ namespace Evo
         private AppData appData;
         private String strUser, strFirst;
         private readonly SpeechSynthesizer _speechSynthesizer = new SpeechSynthesizer();
-        private bool bEvoName = false;
-        private bool bUserName = false;
+        private Boolean bEvoName = false;
+        private Boolean bUserName = false;
 
         public MainWindow()
         {
@@ -125,6 +125,22 @@ namespace Evo
             return lKBs.ToString() + " Bytes";
         }
 
+        private Boolean checkEntry(String strTemp)
+        {
+            foreach (Noun item in appData.listNouns)
+            {
+                if (item.strName.Equals(strTemp))
+                {
+                    _speechSynthesizer.SpeakAsync("I already know this word.");
+                    listViewEvo.Items.Add("I already know this word.");
+                    return true;
+                }
+            }
+            _speechSynthesizer.SpeakAsync("This is a new word. I will save it.");
+            listViewEvo.Items.Add("This is a new word. I will save it.");
+            return false;
+        }
+
         private void buttonSubmit_Click(object sender, RoutedEventArgs e)
         {
             listViewUser.Items.Add(textBoxUser.Text);
@@ -134,7 +150,7 @@ namespace Evo
                 if (textBoxUser.Text.Trim().Length < 1)
                 {
                     _speechSynthesizer.SpeakAsync("You have not entered a valid name. Please try again.");
-                    listViewEvo.Items.Add("You have not entered a valid name: Please try again.");
+                    listViewEvo.Items.Add("You have not entered a valid name. Please try again.");
                 }
                 else
                 {
@@ -147,6 +163,15 @@ namespace Evo
                     bUserName = false;
                     getStatus();
                 }
+            }
+            else
+            {
+                _speechSynthesizer.SpeakAsync("You have entered the word: " + textBoxUser.Text + ".\n" +
+                    "Now I Will check, if I already know this word.");
+                listViewEvo.Items.Add("You have entered the word: " + textBoxUser.Text + ".\n" +
+                    "Now I Will check, if I already know this word.");
+
+                checkEntry(textBoxUser.Text);
             }
 
             if (bEvoName)
@@ -163,6 +188,12 @@ namespace Evo
                 saveData();
                 getUsername();
             }
+        }
+
+        private void buttonTraining_Click(object sender, RoutedEventArgs e)
+        {
+            _speechSynthesizer.SpeakAsync("OK, let´s do some training. Please enter a noun that i will learn.");
+            listViewEvo.Items.Add("OK, let´s do some training. Please enter a noun that i will learn.");
         }
 
         private void buttonStatus_Click(object sender, RoutedEventArgs e)

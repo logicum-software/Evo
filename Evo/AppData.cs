@@ -10,20 +10,20 @@ namespace Evo
     class AppData
     {
         public String strName { get; set; }
-        public List<String> listNouns;
+        public List<Noun> listNouns;
 
         public AppData()
         {
             strName = "";
-            listNouns = new List<String>();
+            listNouns = new List<Noun>();
         }
 
-        public AppData(String name, List<String> nouns)
+        public AppData(String name, List<Noun> nouns)
         {
             strName = name;
-            listNouns = new List<String>();
+            listNouns = new List<Noun>();
 
-            foreach (String item in nouns)
+            foreach (Noun item in nouns)
                 listNouns.Add(item);
         }
 
