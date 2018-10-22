@@ -14,7 +14,7 @@ namespace Evo
 
         public AppData()
         {
-            strName = "";
+            strName = "Evo";
             listNouns = new List<Noun>();
         }
 

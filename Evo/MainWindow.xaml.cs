@@ -15,8 +15,6 @@ namespace Evo
         private AppData appData;
         private String strUser, strFirst;
         private readonly SpeechSynthesizer _speechSynthesizer = new SpeechSynthesizer();
-        private Boolean bEvoName = false;
-        private Boolean bUserName = false;
 
         public MainWindow()
         {
@@ -27,22 +25,7 @@ namespace Evo
             strFirst = "";
             _speechSynthesizer.SpeakAsync("Welcome to Eevo.");
             listViewEvo.Items.Add("Welcome to Evo.");
-
-            if (appData.strName.Equals(""))
-            {
-                bEvoName = true;
-                getAIName();
-            }
-
-            if (!bEvoName)
-            {
-                bUserName = true;
-                getUsername();
-            }
-
-            //listViewEvo.Items.Add("Willkommen zu Evo. Bitte trage deinen Namen in das Feld mit der Bezeichnung ,\"Dein Text\" ein.");
-            textBoxUser.Focus();
-            textBoxUser.SelectAll();
+            getUsername();
         }
 
         private void saveData()
@@ -85,14 +68,6 @@ namespace Evo
             }
         }
 
-        private void getAIName()
-        {
-            _speechSynthesizer.SpeakAsync("It looks like you havent given me a name yet. Please enter a name and click submit." +
-                " If you enter nothing i will have the name Eevo.");
-            listViewEvo.Items.Add("It looks like you havent given me a name yet. Please enter a name and click submit.\n" +
-                "If you enter nothing i will have the name Evo.");
-        }
-
         private void getStatus()
         {
             _speechSynthesizer.SpeakAsync("I have the following status:");
@@ -115,6 +90,9 @@ namespace Evo
         {
             _speechSynthesizer.SpeakAsync("Now, please enter your first and last name. I need it to distinguish you from other persons.");
             listViewEvo.Items.Add("Now, please enter your first- and lastname.\nI need it to distinguish you from other persons.");
+
+            textBoxUser.Focus();
+            textBoxUser.SelectAll();
         }
 
         private String fileSize()
@@ -145,7 +123,7 @@ namespace Evo
         {
             listViewUser.Items.Add(textBoxUser.Text);
 
-            if (bUserName)
+            if (strUser.Equals(""))
             {
                 if (textBoxUser.Text.Trim().Length < 1)
                 {
@@ -156,11 +134,11 @@ namespace Evo
                 {
                     strUser = textBoxUser.Text.Trim();
                     strFirst = strUser.Split(' ')[0];
+                    saveData();
                     _speechSynthesizer.SpeakAsync("Thank you. Your Name is " + textBoxUser.Text.Trim() + ".");
                     listViewEvo.Items.Add("Thank you. Your Name is " + textBoxUser.Text.Trim() + ".");
                     _speechSynthesizer.SpeakAsync("To make things easier, I will call you " + strFirst + ".");
                     listViewEvo.Items.Add("To make things easier I will call you " + strFirst + ".");
-                    bUserName = false;
                     getStatus();
                 }
             }
@@ -173,26 +151,11 @@ namespace Evo
 
                 checkEntry(textBoxUser.Text);
             }
-
-            if (bEvoName)
-            {
-                if (textBoxUser.Text.Equals(""))
-                    appData.strName = "Evo";
-                else
-                    appData.strName = textBoxUser.Text;
-
-                _speechSynthesizer.SpeakAsync("OK. I will have the name " + appData.strName);
-                listViewEvo.Items.Add("OK. I will have the name " + appData.strName + ".");
-                bEvoName = false;
-                bUserName = true;
-                saveData();
-                getUsername();
-            }
         }
 
         private void buttonTraining_Click(object sender, RoutedEventArgs e)
         {
-            _speechSynthesizer.SpeakAsync("OK, let´s do some training. Please enter a noun that i will learn.");
+            _speechSynthesizer.SpeakAsync("OK, lets do some training. Please enter a noun that i will learn.");
             listViewEvo.Items.Add("OK, let´s do some training. Please enter a noun that i will learn.");
         }
 
