@@ -72,7 +72,7 @@ namespace Evo
         {
             _speechSynthesizer.SpeakAsync("I have the following status:");
             listViewEvo.Items.Add("I have the following status:");
-            _speechSynthesizer.SpeakAsync("My name is " + appData.strName + ".");
+            _speechSynthesizer.SpeakAsync("My name is Eevo.");
             listViewEvo.Items.Add("My name is " + appData.strName + ".");
             _speechSynthesizer.SpeakAsync("My database has a size of " + fileSize() + ".");
             listViewEvo.Items.Add("My database has a size of " + fileSize()+ ".");
